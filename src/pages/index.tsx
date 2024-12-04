@@ -1,15 +1,45 @@
-import yayJpg from '../assets/yay.jpg';
+import { ConnectButton, Connector } from "@ant-design/web3";
+import {
+  Mainnet,
+  MetaMask,
+  OkxWallet,
+  TokenPocket,
+  WagmiWeb3ConfigProvider,
+} from "@ant-design/web3-wagmi";
+import { QueryClient } from "@tanstack/react-query";
+import { http } from "wagmi";
 
-export default function HomePage() {
+const queryClient = new QueryClient();
+
+const App: React.FC = () => {
   return (
-    <div>
-      <h2>Yay! Welcome to umi!</h2>
-      <p>
-        <img src={yayJpg} width="388" />
-      </p>
-      <p>
-        To get started, edit <code>pages/index.tsx</code> and save to reload.
-      </p>
-    </div>
+    <WagmiWeb3ConfigProvider
+      eip6963={{
+        autoAddInjectedWallets: true,
+      }}
+      ens
+      chains={[Mainnet]}
+      transports={{
+        [Mainnet.id]: http(),
+      }}
+      wallets={[
+        MetaMask(),
+        TokenPocket({
+          group: "Popular",
+        }),
+        OkxWallet(),
+      ]}
+      queryClient={queryClient}
+    >
+      <Connector
+        modalProps={{
+          mode: "simple",
+        }}
+      >
+        <ConnectButton quickConnect />
+      </Connector>
+    </WagmiWeb3ConfigProvider>
   );
-}
+};
+
+export default App;
