@@ -1,4 +1,9 @@
-import { ConnectButton, Connector, useAccount } from "@ant-design/web3";
+import {
+  ConnectButton,
+  Connector,
+  useAccount,
+  NFTCard,
+} from "@ant-design/web3";
 import {
   Mainnet,
   Sepolia,
@@ -85,6 +90,10 @@ const App: React.FC = () => {
         <ConnectButton quickConnect />
       </Connector>
       <CallTest />
+      <NFTCard
+        address="0x46371b97f1f67b4851f3103a131dc3f690cbf7cd"
+        tokenId={1}
+      />
     </WagmiWeb3ConfigProvider>
   );
 };
