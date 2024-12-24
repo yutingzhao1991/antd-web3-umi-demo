@@ -43,7 +43,7 @@ const CallTest = () => {
             address: "0x46371b97f1f67b4851f3103a131dc3f690cbf7cd",
             functionName: "awardItem",
             args: [
-              account.address,
+              account?.address,
               "https://api.our-metaverse.xyz/api/meta/42",
             ],
           },
